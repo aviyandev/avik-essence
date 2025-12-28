@@ -23,6 +23,16 @@ final class Config
         return self::$repository?->has($key) ?? false;
     }
 
+    public static function set(string $key, mixed $value): void
+    {
+        self::$repository?->set($key, $value);
+    }
+
+    public static function forget(string $key): void
+    {
+        self::$repository?->forget($key);
+    }
+
     public static function all(): array
     {
         return self::$repository?->all() ?? [];

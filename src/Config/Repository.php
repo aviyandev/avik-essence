@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Avik\Essence\Config;
 
+use Avik\Essence\Support\Arr;
 use Avik\Seed\Contracts\Arrayable;
 
 final class Repository implements Arrayable
@@ -17,17 +18,22 @@ final class Repository implements Arrayable
 
     public function get(string $key, mixed $default = null): mixed
     {
-        return $this->items[$key] ?? $default;
+        return Arr::get($this->items, $key, $default);
     }
 
     public function has(string $key): bool
     {
-        return array_key_exists($key, $this->items);
+        return Arr::has($this->items, $key);
     }
 
     public function set(string $key, mixed $value): void
     {
-        $this->items[$key] = $value;
+        Arr::set($this->items, $key, $value);
+    }
+
+    public function forget(string $key): void
+    {
+        Arr::forget($this->items, $key);
     }
 
     public function all(): array
